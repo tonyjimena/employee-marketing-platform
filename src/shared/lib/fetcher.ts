@@ -9,4 +9,12 @@ const AXIOS_CONFIG: CreateAxiosDefaults = {
 
 const fetcher = axios.create(AXIOS_CONFIG)
 
+fetcher.interceptors.response.use(
+    (response) => response.data,
+    (error) => {
+        console.error("fetcher error ->", error)
+        throw error
+    }
+)
+
 export default fetcher

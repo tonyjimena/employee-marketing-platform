@@ -3,16 +3,11 @@
 import {ReactNode, useContext} from "react"
 import {DataContext} from "../contexts/Context"
 
-export const EmployeeDetailPage = ({
-	handleGoToEmployeesPage
-}: {
-	employee: number
-	handleGoToEmployeesPage: () => void
-}) => {
+export const EmployeeDetailPage = ({id}: {id: number}) => {
 	const {employee} = useContext(DataContext) as any
 
 	const {
-		id,
+		id: employeeId,
 		picture,
 		firstName,
 		lastName,

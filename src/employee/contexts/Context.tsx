@@ -1,26 +1,16 @@
-import { createContext, ReactNode,  } from 'react';
+import {createContext, ReactNode} from "react"
+import {Employee} from "../domain/types"
 
-export const DataContext = createContext({});
+export const DataContext = createContext({})
 
-export const DataProvider = ({ children,employee }:{
-    children:ReactNode,
-    employee:{
-        id:number,
-        picture:string,
-        firstName:string,
-        lastName:string,
-        email:string,
-        role:string,
-        department:string,
-        salary:number,
-        hireDate:string,
-        dismissalDate:string,
-    }
+export const DataProvider = ({
+	children,
+	employee
+}: {
+	children: ReactNode
+	employee: Employee | null
 }) => {
-
-  return (
-    <DataContext.Provider value={{ employee }}>
-      {children}
-    </DataContext.Provider>
-  );
-};
+	return (
+		<DataContext.Provider value={{employee}}>{children}</DataContext.Provider>
+	)
+}
