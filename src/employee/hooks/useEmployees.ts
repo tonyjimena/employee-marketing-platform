@@ -1,23 +1,16 @@
-import {useState, useEffect} from "react"
 import {getEmployees} from "../domain"
 import {Employee} from "../domain/types"
+import {useQuery} from "@/src/shared/hooks/useQuery"
 
 export function useEmployees() {
-	const [employees, setEmployees] = useState<Employee[]>([])
-	const [isLoading, setIsLoading] = useState(false)
-	const [error, setError] = useState<Error | null>(null)
-
-	useEffect(() => {
-		setIsLoading(true)
-		getEmployees()
-			.then((employees) => setEmployees(employees))
-			.catch((error) => {
-				setError(error)
-			})
-			.finally(() => {
-				setIsLoading(false)
-			})
-	}, [])
+	const {
+		data: employees,
+		isLoading,
+		error
+	} = useQuery<Employee[]>({
+		queryKey: "employees",
+		queryFn: () => getEmployees()
+	})
 
 	return {
 		employees,

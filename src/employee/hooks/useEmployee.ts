@@ -1,23 +1,17 @@
-import {useState, useEffect} from "react"
 import {getEmployeeById} from "../domain"
 import {Employee} from "../domain/types"
 
-export function useEmployee({id}: {id: number}) {
-	const [employee, setEmployee] = useState<Employee>()
-	const [isLoading, setIsLoading] = useState(false)
-	const [error, setError] = useState<Error | null>(null)
+import {useQuery} from "@/src/shared/hooks/useQuery"
 
-	useEffect(() => {
-		setIsLoading(true)
-		getEmployeeById(id)
-			.then((employee) => setEmployee(employee))
-			.catch((error) => {
-				setError(error)
-			})
-			.finally(() => {
-				setIsLoading(false)
-			})
-	}, [id])
+export function useEmployee({id}: {id: number}) {
+	const {
+		data: employee,
+		isLoading,
+		error
+	} = useQuery<Employee>({
+		queryKey: `employee-${id}`,
+		queryFn: () => getEmployeeById(id)
+	})
 
 	return {
 		employee,
