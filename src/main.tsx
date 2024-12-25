@@ -1,9 +1,11 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import Employee from './Employees.tsx'
+import './App.scss'
+
+import {EmployeesPage} from '@/employee/pages/employees'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Employee />
+    <EmployeesPage />
   </StrictMode>,
 )
