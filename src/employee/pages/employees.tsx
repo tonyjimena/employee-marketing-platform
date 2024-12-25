@@ -1,14 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {useEffect, useState} from "react"
-import axios from "axios"
 import React from "react"
 import {EmployeeDetailPage} from "./employee"
 import {DataProvider} from "../contexts/Context"
-
-const instance = axios.create({
-	baseURL: "http://localhost:3000/api/",
-	timeout: 1000
-})
+import fetcher from "@/shared/lib/fetcher"
 
 export const EmployeesPage = (): React.ReactElement => {
 	const [data, setData] = useState<any>([])
@@ -17,14 +12,14 @@ export const EmployeesPage = (): React.ReactElement => {
 	const [loading, setLoading] = useState(false)
 
 	const fetchData = async () => {
-		await instance.get("employees", {method: "GET"}).then((response) => {
+		await fetcher.get("employees", {method: "GET"}).then((response) => {
 			setData(response.data)
 			setLoading(false)
 		})
 	}
 
 	const employeefetchData = async () => {
-		await instance
+		await fetcher
 			.get(`employees/${view.selectedEmployee}`, {method: "GET"})
 			.then((response) => {
 				setEmployee(response.data)

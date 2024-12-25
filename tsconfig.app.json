@@ -20,7 +20,9 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/src/*": ["./src/*"],
+			"@/constants/*": ["./constants/*"],
+			"@/shared/*": ["./src/shared/*"]
 		}
 	},
 	"include": ["src", "**/*.ts"]
