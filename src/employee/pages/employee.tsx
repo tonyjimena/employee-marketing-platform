@@ -1,13 +1,25 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import {Link} from "@/src/router/components/Link"
+import {useEmployee} from "../hooks/useEmployee"
 
-import {ReactNode, useContext} from "react"
-import {DataContext} from "../contexts/Context"
+export const EmployeeDetailPage = () => {
+	const paramId = Number(location.pathname.split("employee/")[1])
 
-export const EmployeeDetailPage = ({id}: {id: number}) => {
-	const {employee} = useContext(DataContext) as any
+	const {employee, isLoading, error} = useEmployee({id: paramId})
+
+	if (error) {
+		return <div>Error: {error.message}</div>
+	}
+
+	if (isLoading) {
+		return <div>Loading...</div>
+	}
+
+	if (!employee) {
+		return <div>Employee not found</div>
+	}
 
 	const {
-		id: employeeId,
+		id,
 		picture,
 		firstName,
 		lastName,
@@ -17,60 +29,18 @@ export const EmployeeDetailPage = ({id}: {id: number}) => {
 		salary,
 		hireDate,
 		dismissalDate
-	} = (employee as any) || {}
+	} = employee || {}
 
 	const dateOfHire = hireDate ? hireDate.substring(0, 10) : "Unknown"
 	const dateOfDismissal = dismissalDate
 		? dismissalDate.substring(0, 10)
 		: "Currently hired"
 
-	const Tag = () => {
-		if (role == "user") {
-			return <div className="tag user">User</div>
-		} else if (role == "admin") {
-			return <div className="tag admin">Admin</div>
-		} else if (role == "superadmin") {
-			return <div className="tag superadmin">Superadmin</div>
-		}
-	}
-
-	const DepartamentWithIcon = (): ReactNode => {
-		console.log(department)
-		if (department == "customer success") {
-			return (
-				<div className="departament">
-					<div className="material-icons">support_agent</div>
-					Customer Success
-				</div>
-			)
-		} else if (department == "engineering") {
-			return (
-				<div className="departament">
-					<div className="material-icons">computer</div>
-					IT
-				</div>
-			)
-		} else if (department == "finance") {
-			return (
-				<div className="departament">
-					<div className="material-icons">account_balance</div>
-					Finance
-				</div>
-			)
-		}
-
-		return <>{department}</>
-	}
 	return (
 		<div>
-			<div
-				className="button"
-				onClick={() => {
-					handleGoToEmployeesPage()
-				}}
-			>
+			<Link href="/" className="button">
 				Click here to go back
-			</div>
+			</Link>
 			<div className="employee">
 				<div>{id}</div>
 				<div className="imageWrapper">
@@ -93,11 +63,11 @@ export const EmployeeDetailPage = ({id}: {id: number}) => {
 				<div className="EmployeeDetailPageGroup">
 					<div>
 						<div>Role:</div>
-						<div>{Tag()}</div>
+						<EmployeeRoleTag role={role} />
 					</div>
 					<div>
 						<div>Department:</div>
-						<div>{DepartamentWithIcon()}</div>
+						<DepartamentWithIcon department={department} />
 					</div>
 					<div>
 						<div>Salary:</div>
@@ -118,4 +88,43 @@ export const EmployeeDetailPage = ({id}: {id: number}) => {
 			</div>
 		</div>
 	)
+}
+
+function EmployeeRoleTag({role}: {role: string}) {
+	if (role == "user") {
+		return <div className="tag user">User</div>
+	} else if (role == "admin") {
+		return <div className="tag admin">Admin</div>
+	} else if (role == "superadmin") {
+		return <div className="tag superadmin">Superadmin</div>
+	} else {
+		return <div className="tag">Unknown</div>
+	}
+}
+
+function DepartamentWithIcon({department}: {department: string}) {
+	if (department == "customer success") {
+		return (
+			<div className="departament">
+				<div className="material-icons">support_agent</div>
+				Customer Success
+			</div>
+		)
+	} else if (department == "engineering") {
+		return (
+			<div className="departament">
+				<div className="material-icons">computer</div>
+				IT
+			</div>
+		)
+	} else if (department == "finance") {
+		return (
+			<div className="departament">
+				<div className="material-icons">account_balance</div>
+				Finance
+			</div>
+		)
+	}
+
+	return <div>{department}</div>
 }

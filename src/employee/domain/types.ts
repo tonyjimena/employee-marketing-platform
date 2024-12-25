@@ -9,4 +9,5 @@ export type Employee = {
 	totalSalary: number
 	picture: string
 	dismissalDate: string | null
+	department: string
 }

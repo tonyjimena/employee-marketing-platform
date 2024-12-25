@@ -2,7 +2,7 @@ import React from "react"
 
 import {Employee} from "../domain/types"
 import {useEmployees} from "../hooks/useEmployees"
-import {useRouter} from "@/src/router/useRouter"
+import {useRouter} from "@/src/router/hooks/useRouter"
 
 export const EmployeesPage = (): React.ReactElement => {
 	const {employees, isLoading, error} = useEmployees()
@@ -32,7 +32,8 @@ export const EmployeesPage = (): React.ReactElement => {
 }
 
 function EmployeesBodyTable({employees}: {employees: Employee[]}) {
-	const {navigate} = useRouter()
+	const { navigate } = useRouter()
+	
 	const roleTag = (role: string) => {
 		if (role == "user") {
 			return <div className="tag user">User</div>
@@ -59,12 +60,11 @@ function EmployeesBodyTable({employees}: {employees: Employee[]}) {
 					const number = String(employee.salary)
 
 					return (
-						<tr key={employee.id}>
-							<td
-								onClick={() => {
-									navigate(`/employee/${employee.id}`)
-								}}
-							>
+						<tr
+							key={employee.id}
+							onClick={() => navigate(`/employee/${employee.id}`)}
+						>
+							<td>
 								{employee.dismissalDate
 									? "(Dismissed) " +
 									  employee.firstName +

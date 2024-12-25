@@ -1,16 +1,12 @@
 import {createContext, ReactNode} from "react"
-import {Employee} from "../domain/types"
+import {useEmployees} from "../hooks/useEmployees"
 
 export const DataContext = createContext({})
 
-export const DataProvider = ({
-	children,
-	employee
-}: {
-	children: ReactNode
-	employee: Employee | null
-}) => {
+export const EmployeesContextProvider = ({children}: {children: ReactNode}) => {
+	const {employees} = useEmployees()
+
 	return (
-		<DataContext.Provider value={{employee}}>{children}</DataContext.Provider>
+		<DataContext.Provider value={{employees}}>{children}</DataContext.Provider>
 	)
 }

@@ -1,17 +1,14 @@
 import {EmployeesPage} from "../employee/pages/employees"
 import {EmployeeDetailPage} from "../employee/pages/employee"
-import {DataProvider} from "../employee/contexts/Context"
-import {useRouter} from "../router/useRouter"
-import {RouterContext} from "../router/context"
+import {Route} from "../router/components/Route"
 
 export function App() {
 	return (
-		<RouterContext.Provider value={{}}>
-			<DataProvider employee={null}>
-				<EmployeesManagerPlatformHeader />
-				{Router()}
-			</DataProvider>
-		</RouterContext.Provider>
+		<main>
+			<EmployeesManagerPlatformHeader />
+			<Route path="/" component={<EmployeesPage />} />
+			<Route path="/employee/:id" component={<EmployeeDetailPage />} />
+		</main>
 	)
 }
 
@@ -28,16 +25,4 @@ const EmployeesManagerPlatformHeader = () => {
 			Employee Management Platform
 		</h1>
 	)
-}
-
-function Router() {
-	const {path} = useRouter()
-
-	if (path.includes("employee")) {
-		return <EmployeeDetailPage id={Number(path.split("/")[2])} />
-	}
-
-	return <EmployeesPage />
-
-	return <div>Page not found</div>
 }
