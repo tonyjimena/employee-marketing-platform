@@ -1,11 +1,4 @@
-table{
-    width: 75%;
-    min-width: 800px;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
-
-.employee{
+.employee {
     display: flex;
     justify-content: space-between;
     padding: 10px;
@@ -17,67 +10,192 @@ table{
 .employeeDetailGroup {
     display: flex;
     flex-direction: column;
-    gap:30px;
+    gap: 30px;
     font-size: 16px;
     font-weight: 600;
 
-    > div{
+    >div {
         display: flex;
         gap: 10px;
-        > div:nth-child(1){
-           text-transform: uppercase;
+
+        >div:nth-child(1) {
+            text-transform: uppercase;
         }
-        > div:nth-child(2){
-            font-weight: 400 
+
+        >div:nth-child(2) {
+            font-weight: 400
         }
     }
 }
 
-.button{
+.button {
     background-color: #4c9baf;
     color: white;
     padding: 10px 24px;
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
-    border-radius:  5px;
+    border-radius: 5px;
 }
 
-.tag{
+.tag {
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 14px;
 
 
-    &.user{
+    &.user {
         background-color: #4c9baf95;
 
     }
-    &.admin{
+
+    &.admin {
         background-color: #f5a52387;
     }
-    &.superadmin{
+
+    &.superadmin {
         background-color: #f5454284;
     }
 }
 
-.departament{
+.departament {
     display: flex;
     align-items: center;
 
     div {
-        padding-right:4px;
+        padding-right: 4px;
     }
 }
 
-.imageWrapper{
+.imageWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    }
-img{
+}
+
+img {
     width: 300px !important;
     height: 300px !important;
     width: 100%;
     object-fit: contain
+}
+
+// Flex
+
+.flex {
+    display: flex;
+
+    &.row {
+        flex-direction: row;
+    }
+
+    &.column {
+        flex-direction: column;
+    }
+
+    &.align-center {
+        align-items: center;
+    }
+
+    &.justify-center {
+        justify-content: center;
+    }
+
+    &.gap-1 {
+        gap: 1rem;
+    }
+
+    &.gap-2 {
+        gap: 2rem;
+    }
+
+    &.gap-4 {
+        gap: 4rem;
+    }
+
+    &.gap-8 {
+        gap: 8rem;
+    }
+}
+
+// Margin and padding 
+
+.p-4 {
+    padding: 4px;
+}
+
+.p-8 {
+    padding: 8px;
+}
+
+.p-12 {
+    padding: 12px;
+}
+
+.p-16 {
+    padding: 16px;
+}
+
+.p-20 {
+    padding: 20px;
+}
+
+.m-4 {
+    margin: 4px;
+}
+
+.m-8 {
+    margin: 8px;
+}
+
+.m-12 {
+    margin: 12px;
+}
+
+.m-16 {
+    margin: 16px;
+}
+
+.m-20 {
+    margin: 20px;
+}
+
+.border {
+    border: 1px solid #ccc;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.h-44 {
+    height: 44px;
+}
+
+.skeleton {
+    border-radius: 4px;
+    height: 100%;
+    width: 100%;
+    background-size: 200% 100%;
+
+    background-image: linear-gradient(90deg,
+            #f5f5f5 25%,
+            transparent 25%,
+            transparent 50%,
+            #f5f5f5 50%,
+            #f5f5f5 75%,
+            transparent 75%,
+            transparent);
+
+    animation: infinite-skeleton 1s ease-in-out alternate infinite;
+}
+
+@keyframes infinite-skeleton {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
 }

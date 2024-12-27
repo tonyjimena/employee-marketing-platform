@@ -1,28 +1,13 @@
 import {EmployeesPage} from "../employee/pages/employees"
 import {EmployeeDetailPage} from "../employee/pages/employee"
 import {Route} from "../router/components/Route"
+import {MainLayout} from "../shared/layouts/MainLayout"
 
 export function App() {
 	return (
-		<main>
-			<EmployeesManagerPlatformHeader />
+		<MainLayout>
 			<Route path="/" component={<EmployeesPage />} />
 			<Route path="/employee/:id" component={<EmployeeDetailPage />} />
-		</main>
-	)
-}
-
-const EmployeesManagerPlatformHeader = () => {
-	return (
-		<h1
-			style={{
-				textAlign: "center",
-				fontSize: "24px",
-				fontWeight: "bold",
-				marginBottom: "20px"
-			}}
-		>
-			Employee Management Platform
-		</h1>
+		</MainLayout>
 	)
 }
