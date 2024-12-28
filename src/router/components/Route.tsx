@@ -9,12 +9,12 @@ export function Route({
 }) {
 	const {currentPath} = useRouter()
 
-	if (path.includes("/:")) {
-		const paramName = path.split("/:")[1]
-		const pathWithoutParam = path.replace(`/:${paramName}`, "")
-
-		return currentPath.includes(pathWithoutParam) ? component : null
+	function pathToRegex(path: string) {
+		const escapedPath = path.replace(/:[^\s/]+/g, "([\\w-]+)")
+		return new RegExp(`^${escapedPath}$`)
 	}
 
-	return currentPath === path ? component : null
+	const regex = pathToRegex(path)
+
+	return regex.test(currentPath) ? component : null
 }

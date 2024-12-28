@@ -1,77 +1,59 @@
-.employee {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border: 1px solid #ccc;
-    margin: 10px;
-    gap: 32px;
+:root {
+    --theme-colors-primary: hsl(190, 40%, 50%);
+    --theme-colors-secondary: hsl(35, 90%, 55%);
+    --theme-colors-tertiary: hsl(1, 90%, 60%);
+
+    --theme-colors-primary-light: hsl(191, 100%, 95%);
+    --theme-colors-secondary-light: hsl(36, 100%, 95%);
+    --theme-colors-tertiary-light: hsl(0, 93%, 95%);
+
+    --theme-colors-text: #2f2f2f;
+    --theme-colors-text-secondary: #4e4e4e;
+    --theme-colors-text-light: #f5f5f5;
+
+    --theme-fonts-primary: 'Roboto', sans-serif;
+    --theme-fonts-secondary: 'Roboto', sans-serif;
+
+    --theme-font-size-xs: 0.75rem;
+    --theme-font-size-sm: 0.875rem;
+    --theme-font-size-md: 1rem;
+    --theme-font-size-lg: 1.125rem;
+    --theme-font-size-xl: 1.25rem;
+    --theme-font-size-2xl: 1.5rem;
 }
 
-.employeeDetailGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    font-size: 16px;
-    font-weight: 600;
+// RESET
 
-    >div {
-        display: flex;
-        gap: 10px;
-
-        >div:nth-child(1) {
-            text-transform: uppercase;
-        }
-
-        >div:nth-child(2) {
-            font-weight: 400
-        }
-    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.button {
-    background-color: #4c9baf;
-    color: white;
-    padding: 10px 24px;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    border-radius: 5px;
+html {
+    font-size: 100%;
 }
 
-.tag {
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 14px;
-
-
-    &.user {
-        background-color: #4c9baf95;
-
-    }
-
-    &.admin {
-        background-color: #f5a52387;
-    }
-
-    &.superadmin {
-        background-color: #f5454284;
-    }
+body {
+    font-family: var(--theme-fonts-primary);
+    font-size: var(--theme-font-size-md);
+    line-height: 1.5;
+    color: var(--theme-colors-text);
 }
 
-.departament {
-    display: flex;
-    align-items: center;
-
-    div {
-        padding-right: 4px;
-    }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--theme-fonts-secondary);
+    font-weight: bold;
+    line-height: 1.2;
+    color: var(--theme-colors-text-secondary);
 }
 
-.imageWrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 
 img {
     width: 300px !important;
@@ -198,4 +180,93 @@ img {
     100% {
         background-position: 200% 0;
     }
+}
+
+
+.main-layout {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 2rem;
+}
+
+.employee {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 10px;
+    gap: 32px;
+}
+
+.employeeDetailGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    font-size: 16px;
+    font-weight: 600;
+
+    >div {
+        display: flex;
+        gap: 10px;
+
+        >div:nth-child(1) {
+            text-transform: uppercase;
+        }
+
+        >div:nth-child(2) {
+            font-weight: 400
+        }
+    }
+}
+
+.button {
+    background-color: var(--theme-colors-primary);
+    color: white;
+    padding: 10px 24px;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 4px;
+}
+
+.tag {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    border: 1px solid;
+
+    &.user {
+        color: var(--theme-colors-primary);
+        background-color: var(--theme-colors-primary-light);
+        border-color: var(--theme-colors-primary);
+    }
+
+    &.admin {
+        color: var(--theme-colors-secondary);
+        background-color: var(--theme-colors-secondary-light);
+        border-color: var(--theme-colors-secondary);
+    }
+
+    &.superadmin {
+        color: var(--theme-colors-tertiary);
+        background-color: var(--theme-colors-tertiary-light);
+        border-color: var(--theme-colors-tertiary);
+    }
+}
+
+.departament {
+    display: flex;
+    align-items: center;
+
+    div {
+        padding-right: 4px;
+    }
+}
+
+.imageWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

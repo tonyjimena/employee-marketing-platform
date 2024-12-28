@@ -1,10 +1,10 @@
-import {Content} from "../components/Content"
-import {Footer} from "../components/Footer"
-import {Header} from "../components/Header"
+import {Content} from "@/ui/content"
+import {Footer} from "@/ui/footer"
+import {Header} from "@/ui/header"
 
 export function MainLayout({children}: {children: React.ReactNode}) {
 	return (
-		<div className="flex column gap-2">
+		<div className="main-layout">
 			<Header />
 			<Content>{children}</Content>
 			<Footer />
