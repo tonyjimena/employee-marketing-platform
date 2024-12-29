@@ -1,16 +1,17 @@
 import {useEffect, useState} from "react"
 import {getFromLocalStorage, saveOnLocalStorage} from "../utils/localStorage"
+import {CustomError} from "../errors/types"
 
 export function useQuery<T>({
 	queryKey,
 	queryFn
 }: {
 	queryKey: string
-	queryFn: () => Promise<unknown>
+	queryFn: () => Promise<T>
 }) {
 	const [data, setData] = useState<T>(getFromLocalStorage(queryKey))
 	const [isLoading, setIsLoading] = useState(false)
-	const [error, setError] = useState<Error | null>(null)
+	const [error, setError] = useState<CustomError | null>(null)
 
 	useEffect(() => {
 		setIsLoading(!data)

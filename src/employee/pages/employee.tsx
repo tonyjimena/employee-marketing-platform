@@ -1,11 +1,12 @@
 import {Link} from "@/src/router/components/Link"
 import {useEmployee} from "../hooks/useEmployee"
+import {ErrorComponent} from "@/src/shared/errors/component"
 
 export const EmployeeDetailPage = ({id}: {id: string}) => {
 	const {employee, isLoading, error} = useEmployee({id: id})
 
 	if (error) {
-		return <div>Error: {error.message}</div>
+		return <ErrorComponent error={error} />
 	}
 
 	if (isLoading) {
