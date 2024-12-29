@@ -12,7 +12,7 @@ export async function getEmployees(): Promise<Employee[]> {
 	}
 }
 
-export async function getEmployeeById(id: number): Promise<Employee> {
+export async function getEmployeeById(id: string | number): Promise<Employee> {
 	try {
 		const employee: Employee = await fetcher.get(ENDPOINTS.EMPLOYEES + `/${id}`)
 		return employee

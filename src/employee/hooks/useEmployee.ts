@@ -2,7 +2,7 @@ import {getEmployeeById} from "../domain"
 import {Employee} from "../domain/types"
 import {useQuery} from "@/src/shared/hooks/useQuery"
 
-export function useEmployee({id}: {id: number}) {
+export function useEmployee({id}: {id: string | number}) {
 	const {
 		data: employee,
 		isLoading,

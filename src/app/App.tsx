@@ -6,8 +6,11 @@ import {MainLayout} from "../shared/layouts/MainLayout"
 export function App() {
 	return (
 		<MainLayout>
-			<Route path="/" component={<EmployeesPage />} />
-			<Route path="/employee/:id" component={<EmployeeDetailPage />} />
+			<Route path="/" component={() => <EmployeesPage />} />
+			<Route
+				path="/employee/:id"
+				component={(id) => <EmployeeDetailPage id={id as string} />}
+			/>
 		</MainLayout>
 	)
 }

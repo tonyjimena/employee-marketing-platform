@@ -1,10 +1,8 @@
 import {Link} from "@/src/router/components/Link"
 import {useEmployee} from "../hooks/useEmployee"
 
-export const EmployeeDetailPage = () => {
-	const paramId = Number(location.pathname.split("employee/")[1])
-
-	const {employee, isLoading, error} = useEmployee({id: paramId})
+export const EmployeeDetailPage = ({id}: {id: string}) => {
+	const {employee, isLoading, error} = useEmployee({id: id})
 
 	if (error) {
 		return <div>Error: {error.message}</div>
@@ -19,7 +17,7 @@ export const EmployeeDetailPage = () => {
 	}
 
 	const {
-		id,
+		id: employeeId,
 		picture,
 		firstName,
 		lastName,
@@ -42,7 +40,7 @@ export const EmployeeDetailPage = () => {
 				Click here to go back
 			</Link>
 			<div className="employee">
-				<div>{id}</div>
+				<div>{employeeId}</div>
 				<div className="imageWrapper">
 					<img src={picture} width={"250px"} height={"250px"} />
 				</div>

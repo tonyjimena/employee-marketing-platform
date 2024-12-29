@@ -11,7 +11,7 @@ export function EmployeesTableRow({employee}: {employee: Employee}) {
 	}
 
 	return (
-		<tr key={employee.id} onClick={() => navigate(`/employee/${employee.id}`)}>
+		<tr onClick={() => navigate(`/employee/${employee.id}`)}>
 			<td>
 				{employee.dismissalDate
 					? "(Dismissed) " + employee.firstName + " " + employee.lastName

@@ -17,7 +17,7 @@ export function EmployeesDataTable({employees}: {employees: Employee[]}) {
 				</thead>
 				<tbody>
 					{employees.map((employee: Employee) => (
-						<EmployeesTableRow employee={employee} />
+						<EmployeesTableRow key={employee.id} employee={employee} />
 					))}
 				</tbody>
 			</table>

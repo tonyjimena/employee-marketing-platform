@@ -5,7 +5,7 @@ export function Route({
 	component
 }: {
 	path: string
-	component: React.ReactNode
+	component: (id?: string | number) => React.ReactNode
 }) {
 	const {currentPath} = useRouter()
 
@@ -15,6 +15,8 @@ export function Route({
 	}
 
 	const regex = pathToRegex(path)
+	const match = currentPath.match(regex)
+	const id = match ? match[1] : undefined
 
-	return regex.test(currentPath) ? component : null
+	return match ? component(id) : null
 }
