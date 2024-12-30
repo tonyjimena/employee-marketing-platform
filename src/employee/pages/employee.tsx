@@ -1,12 +1,13 @@
-import {Link} from "@/src/router/components/Link"
+import {DepartamentWithIcon} from "../components/DepartmentWithIcon"
+import {EmployeeRoleTag} from "../components/EmployeeRoleTag"
 import {useEmployee} from "../hooks/useEmployee"
-import {ErrorComponent} from "@/src/shared/errors/component"
+import {ErrorView} from "@/src/shared/errors/components"
 
-export const EmployeeDetailPage = ({id}: {id: string}) => {
+export const EmployeeDetailPage = ({id}: {id: string | number}) => {
 	const {employee, isLoading, error} = useEmployee({id: id})
 
 	if (error) {
-		return <ErrorComponent error={error} />
+		return <ErrorView error={error} />
 	}
 
 	if (isLoading) {
@@ -17,113 +18,43 @@ export const EmployeeDetailPage = ({id}: {id: string}) => {
 		return <div>Employee not found</div>
 	}
 
-	const {
-		id: employeeId,
-		picture,
-		firstName,
-		lastName,
-		email,
-		role,
-		department,
-		salary,
-		hireDate,
-		dismissalDate
-	} = employee || {}
-
-	const dateOfHire = hireDate ? hireDate.substring(0, 10) : "Unknown"
-	const dateOfDismissal = dismissalDate
-		? dismissalDate.substring(0, 10)
-		: "Currently hired"
+	const fullName = `${employee.firstName} ${employee.lastName}`
 
 	return (
-		<div>
-			<Link href="/" className="button">
-				Click here to go back
-			</Link>
-			<div className="employee">
-				<div>{employeeId}</div>
-				<div className="imageWrapper">
-					<img src={picture} width={"250px"} height={"250px"} />
+		<div className="employee-detail">
+			<div className="image">
+				<img
+					alt={`${fullName} photo`}
+					src={employee.picture}
+					width="300"
+					height="300"
+				/>
+			</div>
+			<div className="flex column gap-1">
+				<div className="flex column">
+					<h2>{fullName}</h2>
+					<a href={`mailto:${employee.email}`}>{employee.email}</a>
 				</div>
-				<div className="EmployeeDetailPageGroup">
-					<div>
-						<div>Name:</div>
-						<div>{firstName}</div>
-					</div>
-					<div>
-						<div>Last name:</div>
-						<div>{lastName}</div>
-					</div>
-					<div>
-						<div>Email:</div>
-						<div>{email}</div>
-					</div>
+				<DepartamentWithIcon department={employee.department} />
+				<div>
+					<p className="font-bold">Salary:</p>
+					<p>{employee.salary} €</p>
 				</div>
-				<div className="EmployeeDetailPageGroup">
-					<div>
-						<div>Role:</div>
-						<EmployeeRoleTag role={role} />
-					</div>
-					<div>
-						<div>Department:</div>
-						<DepartamentWithIcon department={department} />
-					</div>
-					<div>
-						<div>Salary:</div>
-						<div>{salary} €</div>
-					</div>
+
+				<div>
+					{employee.hireDate ? (
+						<p>Hired on {employee.hireDate.substring(0, 10)}</p>
+					) : null}
 				</div>
-				<div className="EmployeeDetailPageGroup">
-					<div>
-						<div>Hired on:</div>
-						<div>{dateOfHire}</div>
-					</div>
-					<div>
-						<div>Dismissal date:</div>
-						<div>{dateOfDismissal}</div>
-					</div>
+				<div>
+					{employee.dismissalDate ? (
+						<p>Dismissed {employee.dismissalDate.substring(0, 10)}</p>
+					) : (
+						<p>Currently hired</p>
+					)}
 				</div>
-				{/* <div className='EmployeeDetailPageGroup'></div> */}
+				<EmployeeRoleTag role={employee.role} />
 			</div>
 		</div>
 	)
-}
-
-function EmployeeRoleTag({role}: {role: string}) {
-	if (role == "user") {
-		return <div className="tag user">User</div>
-	} else if (role == "admin") {
-		return <div className="tag admin">Admin</div>
-	} else if (role == "superadmin") {
-		return <div className="tag superadmin">Superadmin</div>
-	} else {
-		return <div className="tag">Unknown</div>
-	}
-}
-
-function DepartamentWithIcon({department}: {department: string}) {
-	if (department == "customer success") {
-		return (
-			<div className="departament">
-				<div className="material-icons">support_agent</div>
-				Customer Success
-			</div>
-		)
-	} else if (department == "engineering") {
-		return (
-			<div className="departament">
-				<div className="material-icons">computer</div>
-				IT
-			</div>
-		)
-	} else if (department == "finance") {
-		return (
-			<div className="departament">
-				<div className="material-icons">account_balance</div>
-				Finance
-			</div>
-		)
-	}
-
-	return <div>{department}</div>
 }

@@ -1,11 +1,12 @@
 import {useEmployees} from "../hooks/useEmployees"
 import {EmployeesDataTable} from "../components/data-table/EmployeesDataTable"
+import {ErrorView} from "@/src/shared/errors/components"
 
 export function EmployeesPage() {
 	const {employees, isLoading, error} = useEmployees()
 
 	if (error) {
-		return <div>Error: {error.message}</div>
+		return <ErrorView error={error} />
 	}
 
 	if (isLoading) {

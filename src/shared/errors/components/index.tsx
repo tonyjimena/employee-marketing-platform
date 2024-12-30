@@ -1,6 +1,6 @@
 import {CustomError} from "../types"
 import "./styles.scss"
-export function ErrorComponent({error}: {error: CustomError}) {
+export function ErrorView({error}: {error: CustomError}) {
 	return (
 		<div className="error-container">
 			<h2>{error.status || "Ups!"}</h2>

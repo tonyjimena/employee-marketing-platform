@@ -4,9 +4,23 @@ header {
     margin: 4px 2px;
     border-radius: 5px;
 
+    .back-button {
+        color: var(--theme-colors-text);
+        font-size: var(--theme-font-size-xl);
+        font-weight: bold;
+        text-decoration: none;
+
+
+        &:hover {
+            color: var(--theme-colors-primary);
+        }
+    }
+
     p {
         font-size: var(--theme-font-size-xl);
         font-weight: bold;
         color: var(--theme-colors-text);
     }
+
+
 }
