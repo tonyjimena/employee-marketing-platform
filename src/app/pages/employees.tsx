@@ -1,5 +1,5 @@
-import {useEmployees} from "../hooks/useEmployees"
-import {EmployeesDataTable} from "../components/data-table/EmployeesDataTable"
+import {useEmployees} from "@/src/employee/hooks/useEmployees"
+import {EmployeesDataTable} from "@/src/employee/components/data-table/EmployeesDataTable"
 import {ErrorView} from "@/src/shared/errors/components"
 
 export function EmployeesPage() {

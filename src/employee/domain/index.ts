@@ -17,9 +17,34 @@ export async function getEmployeeById(id: string | number): Promise<Employee> {
 	try {
 		const employee: Employee = await fetcher.get(ENDPOINTS.EMPLOYEES + `/${id}`)
 		return employee
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	} catch (error: any) {
 		console.error("getEmployee error ->", error)
+		throw new CustomError(error.message, error.status)
+	}
+}
+
+export async function updateEmployee(
+	id: string | number,
+	data: Employee
+): Promise<Employee> {
+	try {
+		const employee: Employee = await fetcher.put(
+			ENDPOINTS.EMPLOYEES + `/${id}`,
+			data
+		)
+		return employee
+	} catch (error: any) {
+		console.error("updateEmployee error ->", error)
+		throw new CustomError(error.message, error.status)
+	}
+}
+
+export async function createEmployee(data: Employee): Promise<Employee> {
+	try {
+		const employee: Employee = await fetcher.post(ENDPOINTS.EMPLOYEES, data)
+		return employee
+	} catch (error: any) {
+		console.error("createEmployee error ->", error)
 		throw new CustomError(error.message, error.status)
 	}
 }

@@ -9,7 +9,7 @@ header {
         font-size: var(--theme-font-size-xl);
         font-weight: bold;
         text-decoration: none;
-
+        cursor: pointer;
 
         &:hover {
             color: var(--theme-colors-primary);

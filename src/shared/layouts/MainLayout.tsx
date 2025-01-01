@@ -1,6 +1,6 @@
-import {Content} from "@/ui/content"
-import {Footer} from "@/ui/footer"
-import {Header} from "@/ui/header"
+import {Content} from "@/src/shared/components/ui/content/Content"
+import {Footer} from "@/src/shared/components/ui/footer/Footer"
+import {Header} from "@/src/shared/components/ui/header/Header"
 
 export function MainLayout({children}: {children: React.ReactNode}) {
 	return (

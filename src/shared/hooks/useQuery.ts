@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react"
+import {useCallback, useEffect, useState} from "react"
 import {getFromLocalStorage, saveOnLocalStorage} from "../utils/localStorage"
 import {CustomError} from "../errors/types"
 
@@ -13,8 +13,8 @@ export function useQuery<T>({
 	const [isLoading, setIsLoading] = useState(false)
 	const [error, setError] = useState<CustomError | null>(null)
 
-	useEffect(() => {
-		setIsLoading(!data)
+	const getData = useCallback(() => {
+		setIsLoading(true)
 		queryFn()
 			.then((data) => {
 				setData(data as T)
@@ -26,11 +26,16 @@ export function useQuery<T>({
 			.finally(() => {
 				setIsLoading(false)
 			})
+	}, [queryFn, queryKey])
+
+	useEffect(() => {
+		getData()
 	}, [])
 
 	return {
 		data,
 		isLoading,
-		error
+		error,
+		refetch: getData
 	}
 }

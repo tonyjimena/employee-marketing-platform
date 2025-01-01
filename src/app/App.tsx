@@ -1,13 +1,15 @@
-import {EmployeesPage} from "../employee/pages/employees"
-import {EmployeeDetailPage} from "../employee/pages/employee"
-import {Route} from "../router/components/Route"
-import {MainLayout} from "../shared/layouts/MainLayout"
-import { EditEmployeePage } from "../employee/pages/edit-employee"
+import {EmployeesPage} from "@/src/app/pages/employees"
+import {EmployeeDetailPage} from "@/src/app/pages/employee"
+import {Route} from "@/src/router/components/Route"
+import {MainLayout} from "@/src/shared/layouts/MainLayout"
+import {EditEmployeePage} from "@/src/app/pages/edit-employee"
+import {CreateEmployeePage} from "./pages/create-employee"
 
 export function App() {
 	return (
 		<MainLayout>
 			<Route path="/" component={() => <EmployeesPage />} />
+			<Route path="/employees/create" component={() => <CreateEmployeePage />} />
 			<Route
 				path="/employee/:id"
 				component={(id) => <EmployeeDetailPage id={id as string} />}

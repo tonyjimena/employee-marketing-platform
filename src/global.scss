@@ -203,17 +203,7 @@ h6 {
     }
 }
 
-
-.main-layout {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
-    gap: 2rem;
-}
-
-
-button {
+button, .button {
     background-color: var(--theme-colors-primary);
     color: white;
     padding: 8px 16px;
@@ -233,8 +223,7 @@ button {
     }
 
     &:disabled {
-        background-color: var(--theme-colors-tertiary);
-        color: var(--theme-colors-text-secondary);
+        opacity: 0.5;
     }
 
     &.primary {
@@ -246,6 +235,15 @@ button {
         background-color: var(--theme-colors-secondary);
         color: white;
     }
+}
+
+
+.main-layout {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 2rem;
 }
 
 .tag {
@@ -285,6 +283,7 @@ button {
 
 
 .employee-detail {
+
     display: flex;
     flex-direction: row;
     gap: 2rem;
@@ -309,6 +308,7 @@ button {
         }
     }
 }
+
 
 .input-field {
     display: flex;
