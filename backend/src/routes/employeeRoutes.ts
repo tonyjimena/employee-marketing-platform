@@ -238,15 +238,21 @@ router.post(
 	upload.single("picture"),
 	async (req: Request, res: Response) => {
 		try {
+			let picture = req.body.picture
+
+			if (req.file) {
+				picture = `${BASE_URL}/uploads/${req.file.filename}`
+			}
+
 			const [updated] = await Employee.update(
 				{
 					...req.body,
-					picture: req.file?.filename
-						? `${BASE_URL}/uploads/${req.file.filename}`
-						: null
-				}, {
-				where: {id: req.params.id}
-			})
+					picture: picture
+				},
+				{
+					where: {id: req.params.id}
+				}
+			)
 			if (updated) {
 				const updatedEmployee = await Employee.findByPk(req.params.id)
 				res.json(updatedEmployee)
@@ -254,6 +260,7 @@ router.post(
 				res.status(404).json({error: "Employee not found"})
 			}
 		} catch (error) {
+			console.error("Error updating employee ->", error)
 			res.status(400).json({error: "Error updating employee"})
 		}
 	}

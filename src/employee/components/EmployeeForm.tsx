@@ -23,7 +23,9 @@ export function EmployeeForm({employee}: {employee?: Employee}) {
 				dismissalDate: String(formData.dismissalDate),
 				department: String(formData.department),
 				salary: Number(formData.salary),
-				picture: formData.picture as File,
+				picture: formData.picture
+					? (formData.picture as File)
+					: (employee?.picture as string),
 				role: String(formData.role)
 			}
 
@@ -45,18 +47,21 @@ export function EmployeeForm({employee}: {employee?: Employee}) {
 				</div>
 				<div className="flex column gap-1">
 					<InputField
+						required
 						label="First name"
 						name="firstName"
 						type="text"
 						value={employee?.firstName || ""}
 					/>
 					<InputField
+						required
 						label="Last name"
 						name="lastName"
 						type="text"
 						value={employee?.lastName || ""}
 					/>
 					<InputField
+						required
 						label="Email"
 						name="email"
 						type="email"

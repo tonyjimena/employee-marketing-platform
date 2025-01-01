@@ -56,7 +56,7 @@ export const EmployeeDetailPage = ({id}: {id: string}) => {
 				</div>
 				<EmployeeRoleTag role={employee.role} />
 
-				<Link href={`/employee/${employee.id}/edit`} className="button">
+				<Link href={`/employee/${employee.id}/edit`}>
 					Edit employee
 				</Link>
 			</div>

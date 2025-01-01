@@ -1,5 +1,9 @@
 .data-table {
 
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
     max-height: 75vh;
     width: 100vw;
     overflow: scroll;
@@ -15,6 +19,7 @@
             position: sticky;
             top: 0;
             background-color: white;
+
             th {
                 padding: 8px;
             }
