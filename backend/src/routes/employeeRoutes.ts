@@ -1,7 +1,20 @@
-import { Router, Request, Response } from 'express';
-import { Employee } from '../models/employee';
+import {Router, Request, Response} from "express"
+import multer from "multer"
+import {Employee} from "../models/employee"
 
-const router = Router();
+const BASE_URL = process.env.BASE_URL || "http://localhost:3000"
+
+const router = Router()
+const storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		cb(null, "./src/public/uploads")
+	},
+	filename: function (req, file, cb) {
+		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9)
+		cb(null, uniqueSuffix + file.originalname)
+	}
+})
+const upload = multer({storage: storage})
 
 /**
  * @swagger
@@ -96,16 +109,24 @@ const router = Router();
  *                     description: Employee's role
  */
 
-router.get('/employees', async (req: Request, res: Response) => {
-  try {
-    const employees = await Employee.findAll({
-      attributes: ['id', 'firstName', 'lastName', 'hireDate', 'email', 'salary', 'role']
-    });
-    res.json(employees);
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching employees' });
-  }
-});
+router.get("/employees", async (req: Request, res: Response) => {
+	try {
+		const employees = await Employee.findAll({
+			attributes: [
+				"id",
+				"firstName",
+				"lastName",
+				"hireDate",
+				"email",
+				"salary",
+				"role"
+			]
+		})
+		res.json(employees)
+	} catch (error) {
+		res.status(500).json({error: "Error fetching employees"})
+	}
+})
 
 /**
  * @swagger
@@ -130,18 +151,18 @@ router.get('/employees', async (req: Request, res: Response) => {
  *         description: Employee not found
  */
 
-router.get('/employees/:id', async (req: Request, res: Response) => {
-  try {
-    const employee = await Employee.findByPk(req.params.id);
-    if (employee) {
-      res.json(employee);
-    } else {
-      res.status(404).json({ error: 'Employee not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching employee' });
-  }
-});
+router.get("/employees/:id", async (req: Request, res: Response) => {
+	try {
+		const employee = await Employee.findByPk(req.params.id)
+		if (employee) {
+			res.json(employee)
+		} else {
+			res.status(404).json({error: "Employee not found"})
+		}
+	} catch (error) {
+		res.status(500).json({error: "Error fetching employee"})
+	}
+})
 
 /**
  * @swagger
@@ -163,19 +184,30 @@ router.get('/employees/:id', async (req: Request, res: Response) => {
  *               $ref: '#/components/schemas/Employee'
  */
 
-router.post('/employees', async (req: Request, res: Response) => {
-  try {
-    const employee = await Employee.create(req.body);
-    res.status(201).json(employee);
-  } catch (error) {
-    res.status(400).json({ error: 'Error creating employee' });
-  }
-});
+router.post(
+	"/employees",
+	upload.single("picture"),
+	async (req: Request, res: Response) => {
+		try {
+			const employee = await Employee.create({
+				...req.body,
+				picture: req.file?.filename
+					? `${BASE_URL}/uploads/${req.file.filename}`
+					: null
+			})
+			res.status(201).json(employee)
+		} catch (error) {
+			console.error("Error creating employee ->", error)
+
+			res.status(400).json({error: "Error creating employee"})
+		}
+	}
+)
 
 /**
  * @swagger
  * /employees/{id}:
- *   put:
+ *   post:
  *     summary: Update an existing employee
  *     parameters:
  *       - in: path
@@ -201,20 +233,30 @@ router.post('/employees', async (req: Request, res: Response) => {
  *         description: Employee not found
  */
 
-router.put('/employees/:id', async (req: Request, res: Response) => {
-  try {
-    const [updated] = await Employee.update(req.body, {
-      where: { id: req.params.id }
-    });
-    if (updated) {
-      const updatedEmployee = await Employee.findByPk(req.params.id);
-      res.json(updatedEmployee);
-    } else {
-      res.status(404).json({ error: 'Employee not found' });
-    }
-  } catch (error) {
-    res.status(400).json({ error: 'Error updating employee' });
-  }
-});
+router.post(
+	"/employees/:id",
+	upload.single("picture"),
+	async (req: Request, res: Response) => {
+		try {
+			const [updated] = await Employee.update(
+				{
+					...req.body,
+					picture: req.file?.filename
+						? `${BASE_URL}/uploads/${req.file.filename}`
+						: null
+				}, {
+				where: {id: req.params.id}
+			})
+			if (updated) {
+				const updatedEmployee = await Employee.findByPk(req.params.id)
+				res.json(updatedEmployee)
+			} else {
+				res.status(404).json({error: "Employee not found"})
+			}
+		} catch (error) {
+			res.status(400).json({error: "Error updating employee"})
+		}
+	}
+)
 
-export default router;
+export default router

@@ -28,9 +28,14 @@ export async function updateEmployee(
 	data: Employee
 ): Promise<Employee> {
 	try {
-		const employee: Employee = await fetcher.put(
+		const employee: Employee = await fetcher.post(
 			ENDPOINTS.EMPLOYEES + `/${id}`,
-			data
+			data,
+			{
+				headers: {
+					"Content-Type": "multipart/form-data"
+				}
+			}
 		)
 		return employee
 	} catch (error: any) {
@@ -41,7 +46,11 @@ export async function updateEmployee(
 
 export async function createEmployee(data: Employee): Promise<Employee> {
 	try {
-		const employee: Employee = await fetcher.post(ENDPOINTS.EMPLOYEES, data)
+		const employee: Employee = await fetcher.post(ENDPOINTS.EMPLOYEES, data, {
+			headers: {
+				"Content-Type": "multipart/form-data"
+			}
+		})
 		return employee
 	} catch (error: any) {
 		console.error("createEmployee error ->", error)

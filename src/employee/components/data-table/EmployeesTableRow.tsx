@@ -23,7 +23,7 @@ export function EmployeesTableRow({employee}: {employee: Employee}) {
 			<td>
 				<RoleTag role={employee.role} />
 			</td>
-			<td>{employee.totalSalary}</td>
+			<td>{employee.salary + " €"}</td>
 		</tr>
 	)
 }

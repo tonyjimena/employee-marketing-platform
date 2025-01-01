@@ -3,7 +3,7 @@ import {ErrorView} from "@/src/shared/errors/components"
 
 import {EmployeeForm} from "@/src/employee/components/EmployeeForm"
 
-export const EditEmployeePage = ({id}: {id: string | number}) => {
+export const EditEmployeePage = ({id}: {id: string}) => {
 	const {employee, isLoading, error} = useEmployee({id: id})
 
 	if (error) {

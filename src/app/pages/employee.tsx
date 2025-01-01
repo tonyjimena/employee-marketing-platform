@@ -4,7 +4,7 @@ import {useEmployee} from "@/src/employee/hooks/useEmployee"
 import { Link } from "@/src/router/components/Link"
 import {ErrorView} from "@/src/shared/errors/components"
 
-export const EmployeeDetailPage = ({id}: {id: string | number}) => {
+export const EmployeeDetailPage = ({id}: {id: string}) => {
 	const {employee, isLoading, error} = useEmployee({id: id})
 
 	if (error) {
@@ -26,7 +26,7 @@ export const EmployeeDetailPage = ({id}: {id: string | number}) => {
 			<div className="image">
 				<img
 					alt={`${fullName} photo`}
-					src={employee.picture}
+					src={employee.picture as string}
 					width="300"
 					height="300"
 				/>

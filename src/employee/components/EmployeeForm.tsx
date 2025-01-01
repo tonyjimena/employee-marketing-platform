@@ -23,7 +23,7 @@ export function EmployeeForm({employee}: {employee?: Employee}) {
 				dismissalDate: String(formData.dismissalDate),
 				department: String(formData.department),
 				salary: Number(formData.salary),
-				picture: String(employee?.picture || undefined),
+				picture: formData.picture as File,
 				role: String(formData.role)
 			}
 
@@ -41,7 +41,7 @@ export function EmployeeForm({employee}: {employee?: Employee}) {
 		<form onSubmit={handleSubmit}>
 			<fieldset className="employee-detail" disabled={isLoading}>
 				<div className="image">
-					<InputImageField name="picture" value={employee?.picture || ""} />
+					<InputImageField name="picture" value={employee?.picture as string} />
 				</div>
 				<div className="flex column gap-1">
 					<InputField

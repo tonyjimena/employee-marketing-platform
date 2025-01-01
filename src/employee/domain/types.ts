@@ -1,12 +1,12 @@
 export type Employee = {
-	id: number | string
+	id: string
 	firstName: string
 	lastName: string
 	hireDate: string
 	email: string
 	salary: number
 	role: string
-	picture: string
+	picture: string | File
 	dismissalDate: string | null
 	department: string
 }

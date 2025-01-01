@@ -14,7 +14,7 @@ export function useQuery<T>({
 	const [error, setError] = useState<CustomError | null>(null)
 
 	const getData = useCallback(() => {
-		setIsLoading(true)
+		setIsLoading(!data)
 		queryFn()
 			.then((data) => {
 				setData(data as T)
@@ -26,7 +26,7 @@ export function useQuery<T>({
 			.finally(() => {
 				setIsLoading(false)
 			})
-	}, [queryFn, queryKey])
+	}, [queryFn, queryKey, data])
 
 	useEffect(() => {
 		getData()
