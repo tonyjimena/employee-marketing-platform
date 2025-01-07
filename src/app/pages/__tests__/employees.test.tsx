@@ -5,7 +5,7 @@ import {EmployeesPage} from "../employees"
 
 const employees = [
 	{
-		id: 1,
+		id: "1",
 		firstName: "John",
 		lastName: "Doe",
 		email: "john.doe@emp.com",
@@ -14,11 +14,10 @@ const employees = [
 		department: "engineering",
 		salary: 50000,
 		picture: "/backend/src/assets/profile2.jpg",
-		role: "user",
-		totalSalary: 50000
+		role: "user"
 	},
 	{
-		id: 2,
+		id: "2",
 		firstName: "Jane",
 		lastName: "Smith",
 		email: "jane.smith@emp.com",
@@ -27,8 +26,7 @@ const employees = [
 		department: "finance",
 		salary: 55000,
 		picture: "/backend/src/assets/profile1.jpg",
-		role: "admin",
-		totalSalary: 55000
+		role: "admin"
 	}
 ]
 

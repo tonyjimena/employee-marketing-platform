@@ -6,10 +6,10 @@ const BASE_URL = process.env.BASE_URL || "http://localhost:3000"
 
 const router = Router()
 const storage = multer.diskStorage({
-	destination: function (req, file, cb) {
+	destination: function (_, __, cb) {
 		cb(null, "./src/public/uploads")
 	},
-	filename: function (req, file, cb) {
+	filename: function (_, file, cb) {
 		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9)
 		cb(null, uniqueSuffix + file.originalname)
 	}
@@ -110,7 +110,7 @@ const upload = multer({storage: storage})
  *                     description: Employee's role
  */
 
-router.get("/employees", async (req: Request, res: Response) => {
+router.get("/employees", async (_: Request, res: Response) => {
 	try {
 		const employees = await Employee.findAll({
 			attributes: [
@@ -252,7 +252,7 @@ router.post(
 			const [updated] = await Employee.update(
 				{
 					...req.body,
-					picture: picture ?? "https://placehold.co/300x300/EEE/31343C"
+					picture: picture
 				},
 				{
 					where: {id: req.params.id}

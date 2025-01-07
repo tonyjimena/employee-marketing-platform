@@ -27,4 +27,5 @@ coverage
 .env
 
 backend/src/public/uploads/*.jpg
+backend/src/public/uploads/*.jpeg
 backend/src/public/uploads/*.png
