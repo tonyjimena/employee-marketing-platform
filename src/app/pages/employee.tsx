@@ -1,7 +1,7 @@
 import {DepartamentWithIcon} from "@/src/employee/components/DepartmentWithIcon"
-import {EmployeeRoleTag} from "@/src/employee/components/EmployeeRoleTag"
+import { RoleTag } from "@/src/employee/components/RoleTag"
 import {useEmployee} from "@/src/employee/hooks/useEmployee"
-import { Link } from "@/src/router/components/Link"
+import {Link} from "@/src/router/components/Link"
 import {ErrorView} from "@/src/shared/errors/components"
 
 export const EmployeeDetailPage = ({id}: {id: string}) => {
@@ -54,11 +54,9 @@ export const EmployeeDetailPage = ({id}: {id: string}) => {
 						<p>Currently hired</p>
 					)}
 				</div>
-				<EmployeeRoleTag role={employee.role} />
+				<RoleTag role={employee.role} />
 
-				<Link href={`/employee/${employee.id}/edit`}>
-					Edit employee
-				</Link>
+				<Link href={`/employee/${employee.id}/edit`}>Edit employee</Link>
 			</div>
 		</div>
 	)

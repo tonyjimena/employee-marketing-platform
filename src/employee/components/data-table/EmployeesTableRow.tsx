@@ -1,5 +1,6 @@
 import {useRouter} from "@/src/router/hooks/useRouter"
-import {Employee, EmployeeRole} from "../../domain/types"
+import {Employee} from "../../domain/types"
+import { RoleTag } from "../RoleTag"
 
 export function EmployeesTableRow({employee}: {employee: Employee}) {
 	const {navigate} = useRouter()
@@ -23,20 +24,7 @@ export function EmployeesTableRow({employee}: {employee: Employee}) {
 			<td>
 				<RoleTag role={employee.role} />
 			</td>
-			<td>{employee.salary + " €"}</td>
 		</tr>
 	)
 }
 
-function RoleTag({role}: {role: EmployeeRole | string}) {
-	switch (role) {
-		case EmployeeRole.User:
-			return <div className="tag user">User</div>
-		case EmployeeRole.Admin:
-			return <div className="tag admin">Admin</div>
-		case EmployeeRole.SuperAdmin:
-			return <div className="tag superadmin">Superadmin</div>
-		default:
-			return <div className="tag">Unknown</div>
-	}
-}

@@ -1,6 +1,6 @@
 import {Router, Request, Response} from "express"
 import multer from "multer"
-import {Employee} from "../models/employee"
+import {Employee} from "../employee/domain/employee"
 
 const BASE_URL = process.env.BASE_URL || "http://localhost:3000"
 
@@ -189,11 +189,13 @@ router.post(
 	upload.single("picture"),
 	async (req: Request, res: Response) => {
 		try {
+			const picture = req.file
+				? `${BASE_URL}/uploads/${req.file.filename}`
+				: "https://placehold.co/300x300/EEE/31343C"
+			
 			const employee = await Employee.create({
 				...req.body,
-				picture: req.file?.filename
-					? `${BASE_URL}/uploads/${req.file.filename}`
-					: null
+				picture: picture
 			})
 			res.status(201).json(employee)
 		} catch (error) {
@@ -247,7 +249,7 @@ router.post(
 			const [updated] = await Employee.update(
 				{
 					...req.body,
-					picture: picture
+					picture: picture ?? "https://placehold.co/300x300/EEE/31343C"
 				},
 				{
 					where: {id: req.params.id}

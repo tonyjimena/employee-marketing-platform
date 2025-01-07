@@ -3,7 +3,7 @@ import {Button} from "@/src/shared/components/ui/button/Button"
 import {InputField} from "@/src/shared/components/forms/input-field/InputField"
 import {SelectField} from "@/src/shared/components/forms/select-field/SelectField"
 import {InputImageField} from "@/src/shared/components/forms/image-field/ImageField"
-import {Employee} from "../domain/types"
+import {Employee, EmployeeDepartment, EmployeeRole} from "../domain/types"
 import {uuId} from "@/src/shared/utils/uuId"
 
 export function EmployeeForm({employee}: {employee?: Employee}) {
@@ -70,14 +70,10 @@ export function EmployeeForm({employee}: {employee?: Employee}) {
 					<SelectField
 						label="Department"
 						name="department"
-						options={["Finance", "Engineering", "Customer Success"]}
+						options={Object.values(EmployeeDepartment).map((department) => {
+							return department
+						})}
 						value={employee?.department || ""}
-					/>
-					<InputField
-						label="Role"
-						name="role"
-						type="text"
-						value={employee?.role || ""}
 					/>
 				</div>
 				<div className="flex column gap-1">
@@ -86,6 +82,15 @@ export function EmployeeForm({employee}: {employee?: Employee}) {
 						name="salary"
 						type="number"
 						value={employee?.salary || ""}
+					/>
+
+					<SelectField
+						label="Role"
+						name="role"
+						options={Object.values(EmployeeRole).map((role) => {
+							return role
+						})}
+						value={employee?.role || ""}
 					/>
 
 					<InputField
@@ -112,12 +117,6 @@ export function EmployeeForm({employee}: {employee?: Employee}) {
 						}
 					/>
 
-					<SelectField
-						label="Department"
-						name="department"
-						options={["Finance", "Engineering", "Customer Success"]}
-						value={employee?.department || ""}
-					/>
 					<Button type="submit">{isLoading ? "Saving..." : "Save"}</Button>
 				</div>
 			</fieldset>

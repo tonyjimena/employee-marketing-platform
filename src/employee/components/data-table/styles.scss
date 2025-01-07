@@ -5,7 +5,8 @@
     gap: 1rem;
 
     max-height: 75vh;
-    width: 100vw;
+    min-width: 40vw;
+    width: 100%;
     overflow: scroll;
     border: 1px solid #ccc;
     border-radius: 4px;

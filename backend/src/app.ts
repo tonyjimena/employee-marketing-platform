@@ -1,8 +1,8 @@
 import cors from "cors"
 import express from "express"
 import setupSwagger from "./swagger"
-import {Employee} from "./models/employee"
-import initializeEmployees from "./models/seed"
+import {Employee} from "./employee/domain/employee"
+import initializeEmployees from "./employee/domain/seed"
 import employeeRoutes from "./routes/employeeRoutes"
 
 const app = express()
