@@ -62,7 +62,8 @@ const upload = multer({storage: storage})
  *           description: Employee's salary
  *         picture:
  *           type: string
- *           description: URL of the employee's picture
+ *           format: binary
+ *           description: Receive File to save and return URL of the employee's picture
  *         role:
  *           type: string
  *           description: Employee's role

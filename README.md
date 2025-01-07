@@ -97,3 +97,4 @@ There you will find an interactive interface to test the API endpoints and explo
 ### Notes
 
 - The database is configured to store data in memory.
+- Dont forget to copy the `env.example` file to `.env` and fill in the required variables.
