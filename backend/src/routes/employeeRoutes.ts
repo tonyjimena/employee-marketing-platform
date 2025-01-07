@@ -124,6 +124,7 @@ router.get("/employees", async (req: Request, res: Response) => {
 		})
 		res.json(employees)
 	} catch (error) {
+		console.error("Error fetching employees ->", error)
 		res.status(500).json({error: "Error fetching employees"})
 	}
 })
@@ -160,6 +161,7 @@ router.get("/employees/:id", async (req: Request, res: Response) => {
 			res.status(404).json({error: "Employee not found"})
 		}
 	} catch (error) {
+		console.error("Error fetching employee ->", error)
 		res.status(500).json({error: "Error fetching employee"})
 	}
 })
