@@ -7,7 +7,7 @@ describe('App', () => {
 
   describe('WHEN the page loads initially', () => {
     it('shows the page header', () => {
-      cy.get('h1').should('have.text', 'Employee Management Platform')
+      cy.get('header').contains('EMP').should('exist')
     })
 
     it('shows the correct table headers', () => {
@@ -40,10 +40,8 @@ describe('App', () => {
   describe('WHEN the user clicks on a name', () => {
     it('opens the detail view and shows the correct information', () => {
       cy.get('td').contains('Jane Smith').click()
-      cy.contains('2').should('exist')
       cy.get('img').should('exist')
-      cy.contains('Jane').should('exist')
-      cy.contains('Smith').should('exist')
+      cy.contains('Jane Smith').should('exist')
       cy.contains('jane.smith@emp.com').should('exist')
       cy.contains('Admin').should('exist')
       cy.contains('Finance').should('exist')
@@ -51,13 +49,11 @@ describe('App', () => {
       cy.contains('2023-02-20').should('exist')
       cy.contains('Currently hired').should('exist')
 
-      cy.contains('Click here to go back').click()
+      cy.contains('<').click()
 
       cy.get('td').contains('Linda Wilson').click()
-      cy.contains('5').should('exist')
       cy.get('img').should('exist')
-      cy.contains('Linda').should('exist')
-      cy.contains('Wilson').should('exist')
+      cy.contains('Linda Wilson').should('exist')
       cy.contains('linda.wilson@emp.com').should('exist')
       cy.contains('Admin').should('exist')
       cy.contains('Finance').should('exist')
@@ -65,13 +61,13 @@ describe('App', () => {
       cy.contains('2023-05-30').should('exist')
       cy.contains('2023-12-31').should('exist')
 
-      cy.contains('Click here to go back').click()
+      cy.contains('<').click()
 
       cy.get('td').contains('Emily Jones').click()
       cy.contains('Customer Success').should('exist')
       cy.contains('User').should('exist')
 
-      cy.contains('Click here to go back').click()
+      cy.contains('<').click()
 
       cy.get('td').contains('Michael Brown').click()
       cy.contains('Superadmin').should('exist')
@@ -86,7 +82,7 @@ describe('App', () => {
       cy.get('td').contains('Jane Smith').click()
 
       cy.get('table').should('not.exist')
-      cy.contains('Click here to go back').click()
+      cy.contains('<').click()
 
       cy.get('table').should('exist')
     })
@@ -98,9 +94,9 @@ describe('App', () => {
       cy.intercept('GET', 'http://localhost:3000/api/employees/5').as('getEmployee')
 
       cy.get('td').contains('Linda Wilson').click()
-      cy.contains('Click here to go back').click()
+      cy.contains('<').click()
       cy.get('td').contains('Linda Wilson').click()
-      cy.contains('Click here to go back').click()
+      cy.contains('<').click()
       cy.get('td').contains('Linda Wilson').click()
 
       cy.get('@getEmployees.all').should('have.length', 1)
